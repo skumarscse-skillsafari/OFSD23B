@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Objects</title>
+  </head>
+  <body>
+    <h2>Objects</h2>
+
+    <script>
+      // Objects
+      // Non-primitives
+      // key: value
+      // Syntax
+      /* let objName = {
+            propertyName-1: propertyValue-1,
+            propertyName-2: propertyValue-2,
+                          :
+                          :
+            propertyName-2: propertyValue-N           
+      } */
+
+      //   let a = 5;
+      //   let b = 3;
+      //   let c = a + b;
+
+      let user = {
+        name: "John",
+        age: 30,
+        city: "Chennai",
+      };
+      //   console.log(user);
+
+      // Accessing object properties
+      // 1. dot operator
+      // Syntax
+      // objName.propertyName
+      //   console.log(user.age);
+      // 2. square bracket method
+      // Syntax
+      // objName["propertyName"]
+      //   console.log(user["age"]);
+
+      // Adding new property
+      // Syntax
+      // objName.propertyName = propertyValue;
+      //   user.state = "tamilnadu";
+      //   console.log(user);
+
+      //   user["designation"] = "Tester";
+      //   console.log(user);
+
+      // delete
+      // Syntax
+      // delete objName.propertyName
+      //   delete user.state;
+      //   console.log(user);
+
+      //   let product = {
+      //     id: 10002,
+      //     ["product name"]: "Laptop",
+      //   };
+      //   console.log(product);
+
+      //   for (const key in user) {
+      //     // key => "city"
+      //     console.log(user[key]); // user["city"] => Chennai
+      //   }
+
+      //   console.log(Object.entries(user));
+      //   for (const [key, value] of Object.entries(user)) {
+      //     console.log(key, value);
+      //   }
+
+      console.log(user);
+      console.log(Object.entries(user));
+
+      let result = Object.entries(user).map((u) => {
+        if (u[0] === "age") {
+          // ["city", "Chennai"]
+          return [u[0], u[1] * 2];
+        } else {
+          return u;
+        }
+      });
+      console.log(result);
+      console.log(Object.fromEntries(result));
+    </script>
+  </body>
+</html>

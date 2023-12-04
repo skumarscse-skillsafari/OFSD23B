@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Destructuring</title>
+  </head>
+  <body>
+    <h2>Destructuring</h2>
+
+    <script>
+      // Destructuring
+      // 1. Array
+      // 2. Object
+
+      // Array
+      //   let fruits = ["apple", "orange", "mango"];
+      //   console.log(fruits);
+
+      // Syntax
+      // let [varName-1, varName-2,..., varName-N] = [ele-1, ele-2,..., ele-N]
+      //   let fruits = ["apple", "orange", "mango"];
+      //   let [fOne, fTwo, fThree] = fruits;
+      //   console.log(fTwo);
+
+      // Skipping the element
+      //   let fruits = ["apple", "orange", "mango"];
+      //   let [fOne, , fThree] = fruits;
+      //   console.log(fruits[1]);
+
+      // rest
+      //   let fruits = ["apple", "orange", "mango", "banana", "pineapple"];
+      //   let [fOne, fTwo, ...restFruits] = fruits;
+      //   console.log(fOne);
+      //   console.log(fTwo);
+      //   console.log(restFruits);
+      //   let [fThree, fFour, fFive] = restFruits;
+      //   console.log(fThree);
+      //   console.log(fFour);
+      //   console.log(fFive);
+
+      //   function fruits([fOne, fTwo, ...restFruits]) {
+      //     console.log(fOne);
+      //     console.log(fTwo);
+      //     console.log(restFruits);
+      //   }
+      //   fruits(["apple", "orange", "mango", "banana", "pineapple"]);
+
+      //   let user = {
+      //     id: 1,
+      //     name: "John",
+      //     age: 30,
+      //   };
+      //   for (const [key, value] of Object.entries(user)) {
+      //     // [[id, 1], [name, "John"], [age, 30]]
+      //     console.log(key, value);
+      //   }
+
+      // Object destructuring
+      // Syntax
+      /* let {propName-1, propName-1,..., propName-N} = 
+            {propName-1: propVal-1, propName-2: propVal-2,..., propName-N: propVal-N}
+        */
+
+      //   let user = {
+      //     id: 1,
+      //     name: "John",
+      //     age: 30,
+      //   };
+      //   let { name, age, id } = user;
+      //   console.log(id);
+      //   console.log(name);
+      //   console.log(age);
+
+      // Alias name
+      //   let user = {
+      //     id: 1,
+      //     name: "John",
+      //     age: 30,
+      //   };
+      //   let { name: n, age: a, id: i } = user;
+      //   console.log(i);
+      //   console.log(n);
+      //   console.log(a);
+
+      // rest
+      //   let user = {
+      //     id: 1,
+      //     name: "John",
+      //     age: 30,
+      //   };
+      //   let { id, ...restProp } = user;
+      //   console.log(id);
+      //   console.log(restProp);
+      //   let { name, age } = restProp;
+      //   console.log(name);
+      //   console.log(age);
+
+      // Spread operator
+      // 1. Array
+      // 2. Object
+
+      // Array
+      let a = [1, 2, 3];
+      let b = [4, 5, 6];
+      //   let c = [...a, ...b];
+      //   console.log(c);
+
+      let users = [
+        { id: 1, name: "John", age: 30 },
+        { id: 2, name: "Jack", age: 25 },
+        { id: 3, name: "Prince", age: 20 },
+        { id: 4, name: "Mary", age: 23 },
+      ];
+
+      console.log(users);
+      //   const newUsers = users.map((user) => {
+      //     // { id: 1, name: "John", age: 30 }
+      //     return {
+      //       ...user,
+      //       age: user.age * 2,
+      //     };
+      //   });
+
+      const newUsers = users.map((user) => {
+        if (user.id === 1) {
+          return {
+            ...user,
+            age: user.age * 2,
+          };
+        } else {
+          return user;
+        }
+      });
+
+      console.log(newUsers);
+
+      //   let str = "SkillSafari"
+      //   str.indexOf()
+
+      // map => tranform array
+      let result = [1, 2, 3].map((n) => n * n);
+      console.log(result);
+
+      let num = [1, 2, 3, 3, 3, 4];
+      let findRes = num.find((n) => n === 3);
+      console.log(findRes);
+      let filterRes = num.filter((n) => n === 3);
+      console.log(filterRes);
+
+      let mapRes = num.filter((n) => n == 3);
+      let res = mapRes.map((n) => n * n);
+      console.log(res);
+      let red = res.reduce((a, b) => a + b, 0); // a = 27, b = 9
+
+      console.log(red);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Async/Await</title>
+  </head>
+  <body>
+    <h2>Async/Await</h2>
+    <h1 id="demo" class="heading" style="color: red; padding: 10px">Heading</h1>
+    <div>
+      <form action="#">
+        <input type="text" name="search" id="search" />
+        <input type="submit" value="Search" id="btn" />
+      </form>
+    </div>
+    <div class="container"></div>
+
+    <script>
+      // Async/Await
+      // Executing multiple requests
+
+      // 1. Callbacks
+      // 2. Async/Await
+      // 3. Promises
+
+      // callbacks => function inside a function
+      //   let message = function () {
+      //     console.log("Hello");
+      //   };
+
+      //   function display(fname, lname, greetings) {
+      //     // fname = "John"
+      //     // lname = "Jack"
+      //     // greetings = message
+      //     console.log(fname);
+      //     console.log(lname);
+      //     greetings();
+      //   }
+
+      //   display("John", "Jack", message);
+
+      // Promise
+      // 1. Pending => default
+      // 2. Fulfiled => then()
+      // 3. Rejected => catch()
+
+      // fetch()
+      //   fetch("https://fakestoreapi.com/products")
+      //     .then((res) => res.json())
+      //     .then((data) => console.log(data))
+      //     .catch((err) => console.log(err));
+
+      // Async/Await
+      let search = document.querySelector("#search");
+      let searchBtn = document.querySelector("#btn");
+      let newArray = [];
+      searchBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        console.log(e);
+        console.log(search.value);
+        let filteredArr = newArray.filter((arr) =>
+          arr.title.toLowerCase().includes(search.value)
+        );
+        console.log(filteredArr);
+        let container = document.querySelector(".container");
+        //   console.log(container);
+        let productsDiv = filteredArr.map((product, i) => {
+          // console.log(product);
+          return `
+                    <div id=product-${i + 1}>
+                        <p>${product.title}</p>
+                        <p>${product.price}</p>
+                        <p>${product.description}</p>
+                        <p>${product.category}</p>
+                        <p>
+                            <img src=${product.image} alt=${
+            product.title
+          } height="100px" width="100px" /> 
+                        </p>
+                        <hr />
+                    </div>
+                `;
+        });
+        //   console.log(productsDiv.join(" "));
+        container.innerHTML = productsDiv.join(" ");
+      });
+
+      async function fetchData(url) {
+        try {
+          let res = await fetch(url);
+          //   console.log(res);
+          let products = await res.json();
+          newArray = [...products];
+          //   console.log(products);
+          let container = document.querySelector(".container");
+          //   console.log(container);
+          let productsDiv = products.map((product, i) => {
+            // console.log(product);
+            return `
+                    <div id=product-${i + 1}>
+                        <p>${product.title}</p>
+                        <p>${product.price}</p>
+                        <p>${product.description}</p>
+                        <p>${product.category}</p>
+                        <p>
+                            <img src=${product.image} alt=${
+              product.title
+            } height="100px" width="100px" /> 
+                        </p>
+                        <hr />
+                    </div>
+                `;
+          });
+          //   console.log(productsDiv.join(" "));
+          container.innerHTML = productsDiv.join(" ");
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      fetchData("https://fakestoreapi.com/products");
+
+      //   let h1 = document.querySelectorAll("h1");
+      //   console.log(h1);
+      //   h1.test = "demo-update";
+      /* h1 = { 
+           id: "demo",
+           class: "heading",
+           style: {
+            color: "red",
+            padding: "10px"
+           } 
+      }
+      */
+    </script>
+  </body>
+</html>

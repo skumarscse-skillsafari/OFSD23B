@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Function</title>
+  </head>
+  <body>
+    <h2>Function</h2>
+
+    <script>
+      // Function
+      // 1. Function declaration
+      // => Function declaration => Function calling
+      // Syntax
+      /*
+        function functionName(para-1, para-2,..., para-N) {
+            // statements
+        }
+
+        functionName(arg-1, arg-2,..., arg-N)
+      */
+      //   function message(greetings) {
+      //     console.log(`${greetings}, John`);
+      //   }
+      //   message("Hello");
+      //   message("Welcome");
+      // 2. Function Expression
+      // Syntax
+      /*
+        const varName = function (para-1, para-2,..., para-N) {
+            // function statement
+        }
+
+        varName(arg-1, arg-2,..., arg-N)
+      */
+      //   const message = function (greetings) {
+      //     console.log(`${greetings}, John`);
+      //   };
+      //   message("Hello");
+      //   message("Welcome");
+      // 3. Arrow Function
+      // Syntax
+      /*
+        const varName = (para-1, para-2,..., para-N) => {
+            // function statement
+        }
+
+        varName(arg-1, arg-2,..., arg-N)
+    */
+      //   const message = (greetings) => {
+      //     console.log("Demo");
+      //     // return `${greetings}, Jack`;
+      //     return `${greetings}, John`;
+      //   };
+      //   //   console.log(message("Hello"));
+      //   let result = message("Welcome"); // "Welcome, John"
+      //   console.log(result);
+
+      let double = (n) => n * n;
+      let result = double(5);
+      console.log(result);
+
+      // 4. IIFE => immediate invocable function expression
+      // Syntax
+      /*
+        (function () {
+            // function statement
+        })()
+      */
+      (function (msg) {
+        console.log(msg + " IIFE");
+      })("Hello");
+    </script>
+  </body>
+</html>
