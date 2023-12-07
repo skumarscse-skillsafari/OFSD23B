@@ -1,0 +1,5 @@
+Line number - 1 from data.txt
+Line number - 2 from data.txt
+Line number - 3 from data.txt
+Line number - 4 from data.txt
+Line number - 5 from data.txt

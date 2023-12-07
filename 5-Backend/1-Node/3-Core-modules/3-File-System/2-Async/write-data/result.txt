@@ -1,0 +1,11 @@
+Content from Async: Line number - 1 from data.txt - Async
+Line number - 2 from data.txt - Async
+Line number - 3 from data.txt - Async
+Line number - 4 from data.txt - Async
+Line number - 5 from data.txt - Async
+----------------------------------------
+Line number - 1 from data-1.txt - Async
+Line number - 2 from data-1.txt - Async
+Line number - 3 from data-1.txt - Async
+Line number - 4 from data-1.txt - Async
+Line number - 5 from data-1.txt - Async
