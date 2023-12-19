@@ -17,17 +17,13 @@ export const getSingleProduct = (req, res) => {
 };
 
 export const createProduct = (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const id = Math.random().toString(16).slice(2);
   const newProducts = {
     id,
-    title: req.body.title,
-    description: req.body.description,
-    price: req.body.price,
-    category: req.body.category,
-    image: req.body.image,
+    ...req.body,
   };
-  console.log(newProducts);
+  // console.log(newProducts);
   res.status(201).json({
     success: true,
     message: `Product added successfully and the id is ${id}`,
