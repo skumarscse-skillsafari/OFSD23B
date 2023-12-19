@@ -1,4 +1,4 @@
-let products = [
+export let products = [
   {
     id: 1,
     title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
@@ -48,4 +48,10 @@ let products = [
   },
 ];
 
-export default products;
+export const users = [
+  { id: 1, name: "John", age: 23, isAdmin: false },
+  { id: 2, name: "Jack", age: 21, isAdmin: true },
+  { id: 3, name: "Mary", age: 20, isAdmin: false },
+  { id: 4, name: "Robert", age: 19, isAdmin: true },
+  { id: 5, name: "Prince", age: 24, isAdmin: false },
+];
