@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Description" content="Products page" />
+    <title>Products Page</title>
+  </head>
+  <body>
+    <h2>Products Page</h2>
+    <div class="container"></div>
+  </body>
+
+  <script>
+    async function getAllProducts() {
+      let res = await fetch("http://localhost:5000/api/v1/products");
+      let products = await res.json();
+      console.log(products.data);
+      const container = document.querySelector(".container");
+      const productsEle = products.data.map((product) => {
+        return `
+            <div id=${product.id}>
+                <h4>Title: ${product.title}</h4>
+                <h5>Description: ${product.description}</h5>
+                <p>Price: ${product.price}</p>
+                <p>Category: ${product.category}</p>
+                <p>Image: ${product.image}</p>
+                <button id=${product.id} onclick="updateFun(event)">Update</button>
+                <button id=${product.id} onclick="deleteFun(event)">Delete</button>
+                <hr />
+            </div>
+            `;
+      });
+      container.innerHTML = productsEle.join(" ");
+    }
+    getAllProducts();
+
+    async function deleteFun(event) {
+      event.preventDefault();
+      console.log(event.target.id);
+      if (confirm("Are you sure to delete the product?")) {
+        await fetch(
+          `http://localhost:5000/api/v1/products/${event.target.id}`,
+          {
+            method: "DELETE",
+          }
+        );
+        window.location.reload();
+      }
+    }
+  </script>
+</html>

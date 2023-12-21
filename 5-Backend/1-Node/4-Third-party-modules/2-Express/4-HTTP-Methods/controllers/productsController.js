@@ -1,4 +1,5 @@
 import { products } from "../data.js";
+import Products from "../models/productsModel.js";
 
 export const getAllProducts = (req, res) => {
   res.status(200).json({ success: true, data: products });
@@ -18,17 +19,19 @@ export const getSingleProduct = (req, res) => {
 
 export const createProduct = (req, res) => {
   // console.log(req.body);
-  const id = Math.random().toString(16).slice(2);
-  const newProducts = {
-    id,
-    ...req.body,
-  };
-  // console.log(newProducts);
-  res.status(201).json({
-    success: true,
-    message: `Product added successfully and the id is ${id}`,
-    data: newProducts,
-  });
+  new Products(req.body)
+    .save()
+    .then((product) => {
+      return res.status(201).json({
+        success: true,
+        message: `Product added successfully and the id is : ${product._id} `,
+      });
+    })
+    .catch((err) => {
+      res
+        .status(400)
+        .json({ success: false, error: `Something went wrong. Error: ${err}` });
+    });
 };
 
 export const updateProduct = (req, res) => {
