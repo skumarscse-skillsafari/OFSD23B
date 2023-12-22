@@ -1,8 +1,16 @@
 import { products } from "../data.js";
 import Products from "../models/productsModel.js";
 
-export const getAllProducts = (req, res) => {
-  res.status(200).json({ success: true, data: products });
+export const getAllProducts = async (req, res) => {
+  try {
+    const allProducts = await Products.find();
+    // console.log(allProducts);
+    res.status(200).json({ success: true, data: allProducts });
+  } catch (err) {
+    res
+      .status(400)
+      .json({ success: false, error: `Something went wrong. Error: ${err}` });
+  }
 };
 
 export const getSingleProduct = (req, res) => {
@@ -34,55 +42,42 @@ export const createProduct = (req, res) => {
     });
 };
 
-export const updateProduct = (req, res) => {
+export const updateProduct = async (req, res) => {
   const { id } = req.params;
-  const findProduct = products.find((product) => product.id === Number(id));
+  const findProduct = await Products.findById(id);
   if (!findProduct) {
     res
       .status(200)
       .json({ success: true, message: `Product with the id: ${id} not found` });
   } else {
-    const newProduct = {
-      id: findProduct.id,
-      ...req.body,
-    };
-    // console.log(newProduct);
-    let updatedProducts = products.map((product) => {
-      if (product.id === Number(id)) {
-        return {
-          id: product.id,
-          title: newProduct.title,
-          description: newProduct.description,
-          price: newProduct.price,
-          category: newProduct.category,
-          image: newProduct.image,
-        };
-      } else {
-        return product;
-      }
+    await Products.findByIdAndUpdate(id, req.body);
+    res.status(200).json({
+      success: true,
+      message: `Product with the id: ${id} updated successfully`,
     });
-    // console.log(updatedProducts);
-    res
-      .status(200)
-      .json({ success: true, message: "Product updated successfully" });
   }
 };
 
-export const deleteProduct = (req, res) => {
-  const { id } = req.params;
-  const findProduct = products.find((product) => product.id === Number(id));
-  if (!findProduct) {
+export const deleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const findProduct = await Products.findById(id);
+    // console.log(findProduct);
+    if (!findProduct) {
+      res.status(200).json({
+        success: true,
+        message: `Product with the id: ${id} not found`,
+      });
+    } else {
+      await Products.findByIdAndDelete(id);
+      res.status(200).json({
+        success: true,
+        message: `Product with the id: ${id} deleted successfully`,
+      });
+    }
+  } catch (err) {
     res
-      .status(200)
-      .json({ success: true, message: `Product with the id: ${id} not found` });
-  } else {
-    const updatedProducts = products.filter(
-      (product) => product.id !== Number(id)
-    );
-    console.log(updatedProducts);
-    res.status(200).json({
-      success: true,
-      message: `Product with the id: ${id} deleted successfully`,
-    });
+      .status(400)
+      .json({ success: false, error: `Something went wrong. Error: ${err}` });
   }
 };
