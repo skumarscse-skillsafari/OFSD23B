@@ -1,0 +1,29 @@
+import {
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+  useState,
+} from "react";
+import blogReducer from "./blogReducer";
+import axios from "axios";
+
+const Blog = createContext();
+
+const BlogContext = ({ children }) => {
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/v1/blog").then((res) => {
+      dispatch({ type: "FETCH_INIT", payload: res.data });
+    });
+  }, []);
+
+  const [state, dispatch] = useReducer(blogReducer, {});
+  //   console.log(state);
+  return <Blog.Provider value={{ state, dispatch }}>{children}</Blog.Provider>;
+};
+
+export const BlogState = () => {
+  return useContext(Blog);
+};
+
+export default BlogContext;
