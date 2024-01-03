@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useReducer,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useReducer, useEffect } from "react";
 import blogReducer from "./blogReducer";
 import axios from "axios";
 
@@ -17,8 +11,8 @@ const BlogContext = ({ children }) => {
     });
   }, []);
 
-  const [state, dispatch] = useReducer(blogReducer, {});
-  //   console.log(state);
+  const [state, dispatch] = useReducer(blogReducer, []);
+  // console.log(state);
   return <Blog.Provider value={{ state, dispatch }}>{children}</Blog.Provider>;
 };
 

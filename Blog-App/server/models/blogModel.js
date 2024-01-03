@@ -26,6 +26,7 @@ const blogSchema = new mongoose.Schema(
     datePublished: {
       type: Date,
       required: true,
+      default: new Date(),
     },
     comments: [
       {
@@ -40,6 +41,7 @@ const blogSchema = new mongoose.Schema(
     },
     likes: {
       type: Number,
+      default: 0,
     },
   },
   {
