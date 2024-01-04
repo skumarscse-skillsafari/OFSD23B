@@ -17,10 +17,10 @@ const blogReducer = (state, action) => {
       );
     case "DELETE_BLOG":
       axios.delete(
-        `http://localhost:5000/api/v1/blog/${action.payload._id}`,
+        `http://localhost:5000/api/v1/blog/${action.payload}`,
         action.payload
       );
-      return state.filter((blog) => blog._id !== action.payload._id);
+      return state.filter((blog) => blog._id !== action.payload);
 
     default:
       return state;
