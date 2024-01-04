@@ -9,7 +9,7 @@ const CONNECTION_URL = process.env.CONNECTION_URL;
 const app = express();
 
 app.use(cors());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ limit: "5mb", extended: true }));
 app.use(express.json());
 app.use("/api/v1/blog", blogRoute);
 app.get("/", (req, res) => {

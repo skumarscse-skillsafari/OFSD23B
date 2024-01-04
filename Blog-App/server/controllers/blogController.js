@@ -35,7 +35,9 @@ export const getBlogById = async (req, res) => {
 export const updateBlogById = async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedBlog = await Blog.findByIdAndUpdate(id, req.body);
+    const updatedBlog = await Blog.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
     res.status(200).json({ success: true, data: updatedBlog });
   } catch (error) {
     res.status(500).json({ success: false, message: error });
