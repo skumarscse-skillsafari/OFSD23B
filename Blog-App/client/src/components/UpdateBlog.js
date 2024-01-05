@@ -1,40 +1,52 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
 import { BlogState } from "../context/BlogContext";
 import FileBase64 from "react-file-base64";
-const CreateBlog = () => {
-  const [createPost, setCreatePost] = useState({
+import axios from "axios";
+import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+function UpdateBlog() {
+  const { id } = useParams();
+  console.log(id);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/v1/blog/${id}`)
+      .then((res) => setupdateBlog(res?.data?.data));
+  }, []);
+  const [updateBlog, setupdateBlog] = useState({
     title: "",
     content: "",
-    datePublished: new Date().toISOString(),
+    datePublished: "",
     author: "",
     tags: "",
     image: "",
     comments: "",
     likes: 0,
   });
+  console.log(updateBlog);
+
   const { dispatch } = BlogState();
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(createPost);
-    dispatch({ type: "CREATE_BLOG", payload: createPost });
-    window.alert("Post created successfully");
-    window.location.href = "/";
+    console.log(updateBlog);
+    if (window.confirm("Are you sure to update the post")) {
+      dispatch({ type: "UPDATE_BLOG", payload: updateBlog });
+      window.alert("Post updated successfully");
+      window.location.href = "/";
+    }
   };
-
   return (
     <div className="container">
-      <h2>Create Blog</h2>
+      <h2 className="display-3 text-center mb-4">Update Blog</h2>
       <form>
         <p>
           <input
             type="text"
             name="title"
             placeholder="Enter title"
-            value={createPost.title}
+            value={updateBlog?.title}
             className="form-control"
             onChange={(e) =>
-              setCreatePost({ ...createPost, title: e.target.value })
+              setupdateBlog({ ...updateBlog, title: e.target.value })
             }
           />
         </p>
@@ -42,10 +54,10 @@ const CreateBlog = () => {
           <textarea
             name="content"
             placeholder="Enter blog description"
-            value={createPost.content}
+            value={updateBlog?.content}
             className="form-control"
             onChange={(e) =>
-              setCreatePost({ ...createPost, content: e.target.value })
+              setupdateBlog({ ...updateBlog, content: e.target.value })
             }
           ></textarea>
         </p>
@@ -54,10 +66,10 @@ const CreateBlog = () => {
             type="text"
             name="author"
             placeholder="Enter author name"
-            value={createPost.author}
+            value={updateBlog?.author}
             className="form-control"
             onChange={(e) =>
-              setCreatePost({ ...createPost, author: e.target.value })
+              setupdateBlog({ ...updateBlog, author: e.target.value })
             }
           />
         </p>
@@ -66,10 +78,10 @@ const CreateBlog = () => {
             type="text"
             name="tags"
             placeholder="Enter tags seperated by comma"
-            value={createPost.tags}
+            value={updateBlog?.tags}
             className="form-control"
             onChange={(e) =>
-              setCreatePost({ ...createPost, tags: e.target.value.split(",") })
+              setupdateBlog({ ...updateBlog, tags: e.target.value.split(",") })
             }
           />
         </p>
@@ -77,11 +89,11 @@ const CreateBlog = () => {
           <FileBase64
             type="file"
             name="image"
-            value={createPost.image}
+            value={updateBlog?.image}
             className="form-control"
             onDone={({ base64 }) => {
               // console.log(base64);
-              setCreatePost({ ...createPost, image: base64 });
+              setupdateBlog({ ...updateBlog, image: base64 });
             }}
           />
         </p>
@@ -90,10 +102,10 @@ const CreateBlog = () => {
             type="number"
             name="likes"
             placeholder="Enter any number"
-            value={createPost.likes}
+            value={updateBlog?.likes}
             className="form-control"
             onChange={(e) =>
-              setCreatePost({ ...createPost, likes: +e.target.value })
+              setupdateBlog({ ...updateBlog, likes: +e.target.value })
             }
           />
         </p>
@@ -102,15 +114,15 @@ const CreateBlog = () => {
             type="text"
             name="comments"
             placeholder="Enter comment"
-            // value={createPost.comments}
+            value={updateBlog?.comments[0]?.text}
             className="form-control"
             onChange={(e) =>
-              setCreatePost({
-                ...createPost,
+              setupdateBlog({
+                ...updateBlog,
                 comments: [
                   {
                     text: e.target.value,
-                    author: createPost.author,
+                    author: updateBlog.author,
                     date: new Date().toISOString(),
                   },
                 ],
@@ -119,7 +131,7 @@ const CreateBlog = () => {
           />
         </p>
         <button onClick={handleSubmit} className="btn btn-primary">
-          Create
+          Update
         </button>{" "}
         <button className="btn btn-danger">Clear</button>{" "}
         <Link className="btn btn-success" to="/">
@@ -137,6 +149,6 @@ const CreateBlog = () => {
       </form>
     </div>
   );
-};
+}
 
-export default CreateBlog;
+export default UpdateBlog;
