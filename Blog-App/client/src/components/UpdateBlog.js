@@ -36,7 +36,7 @@ function UpdateBlog() {
   };
   return (
     <div className="container">
-      <h2 className="display-3 text-center mb-4">Update Blog</h2>
+      <h2 className="display-3 text-center mb-4">Update Post</h2>
       <form>
         <p>
           <input

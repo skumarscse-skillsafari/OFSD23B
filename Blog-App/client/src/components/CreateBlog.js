@@ -24,7 +24,7 @@ const CreateBlog = () => {
 
   return (
     <div className="container">
-      <h2>Create Blog</h2>
+      <h2>Create Post</h2>
       <form>
         <p>
           <input

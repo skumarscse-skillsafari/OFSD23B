@@ -40,14 +40,23 @@ function Blog() {
           <h2 className="display-5 text-center mt-4">Comments</h2>
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title">{blog?.comments[0]?.text}</h5>
               <p className="card-text">
-                Comment by: {blog?.comments[0]?.author}
+                {" "}
+                <u>
+                  <i>{blog?.comments[0]?.author} Says:</i>
+                </u>
               </p>
+              <h5 className="card-title">{blog?.comments[0]?.text}</h5>
+
               <p className="card-text">
                 Comment date:{" "}
                 {new Date(blog?.comments[0]?.date).toLocaleDateString()}
               </p>
+              <hr />
+              <textarea
+                className="form-control"
+                placeholder="Add new comments..."
+              ></textarea>
             </div>
           </div>
         </div>
