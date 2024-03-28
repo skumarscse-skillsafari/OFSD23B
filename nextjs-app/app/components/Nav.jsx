@@ -22,7 +22,7 @@ const Nav = () => {
       </Link>
       {session?.user ? (
         <>
-          <Link href="/create" className="btn btn-primary">
+          <Link href="/create-post" className="btn btn-primary">
             Create Post
           </Link>
 
